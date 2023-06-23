@@ -4,7 +4,7 @@ import java.time.Year;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.StringUtils;.StringUtils;
 
 // Signature: DHF
 public class User {
@@ -32,17 +32,14 @@ public class User {
         this.userID = UUID.randomUUID().toString();
     }
 
-        private void validateInput(String input, String fieldName) throws Exception {
-        if (input == null || input.trim().isEmpty()) {
-            throw new Exception(fieldName + " should not be null, empty, or blank.");
-        }
-    }
 
-        public void setSchoolIdentifier(String programStudy, String faculty, int enrollmentYear) throws Exception {
+    /// This method is setting up the user's school identifier
+        public void setSchoolIdentifier(String programStudy, String faculty, int enrollmentYear) throws IllegalArgumentException, EnrollmentYearException {
+
         validateInput(programStudy, "Program study");
         validateInput(faculty, "Faculty");
         if (enrollmentYear <= 0 || enrollmentYear >= Integer.MAX_VALUE) {
-            throw new Exception("Enrollment year should be a positive integer.");
+            throw new EnrollmentYearException("Enrollment year should be a positive integer.");
         }
 
         // Set the instance variables
@@ -51,7 +48,9 @@ public class User {
         this.enrollmentYear = enrollmentYear;
     }
 
-    public void setSchoolAccount(String email, String password, String userName) throws Exception {
+
+    public void setSchoolAccount(String email, String password, String userName) throws IllegalArgumentException, EmptyInputException {
+
         validateInput(email, "Email");
         validateInput(password, "Password");
         validateInput(userName, "User name");
@@ -62,7 +61,9 @@ public class User {
         this.userName = userName;
     }
 
-    public void setGeneralInformation(String firstName, String lastName, String gender, String studentIdentifierNumber) throws Exception {
+
+    public void setGeneralInformation(String firstName, String lastName, String gender, String studentIdentifierNumber) throws IllegalArgumentException, EmptyInputException {
+
         validateInput(firstName, "First name");
         validateInput(lastName, "Last name");
         validateInput(gender, "Gender");
@@ -74,7 +75,7 @@ public class User {
         this.gender = gender;
         this.studentIdentifierNumber = studentIdentifierNumber;
     }
-
+}
 
     // This method is used to calculate the year of the user based on the enrollment year
     public int calculateEnrollmentYear() {
