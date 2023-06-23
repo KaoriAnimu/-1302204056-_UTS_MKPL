@@ -75,7 +75,7 @@ public class User {
         this.gender = gender;
         this.studentIdentifierNumber = studentIdentifierNumber;
     }
-}
+
 
     // This method is used to calculate the year of the user based on the enrollment year
     public int calculateEnrollmentYear() {
@@ -147,4 +147,3 @@ public class User {
             System.out.println("THIS IS JOKE RIGHT? PLEASE USE VALID EMAIL AND STRONG PASSWORD");
         }
     }
-}
