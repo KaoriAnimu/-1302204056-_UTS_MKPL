@@ -33,23 +33,23 @@ public class User {
     }
 
     /// This method is setting up the user's school identifier
-public void setSchoolIdentifier(String programStudy, String faculty, int enrollmentYear) throws Exception {
-    // Check if the inputs are empty or blank
-    if (programStudy == null || programStudy.trim().isEmpty()) {
-        throw new Exception("Program study should not be null, empty, or blank.");
-    }
-    if (faculty == null || faculty.trim().isEmpty()) {
-        throw new Exception("Faculty should not be null, empty, or blank.");
-    }
-    if (enrollmentYear <= 0 || enrollmentYear >= Integer.MAX_VALUE) {
-        throw new Exception("Enrollment year should be a positive integer.");
-    }
+    public void setSchoolIdentifier(String programStudy, String faculty, int enrollmentYear) throws Exception {
+        // Check if the inputs are empty or blank
+        if (programStudy == null || programStudy.trim().isEmpty()) {
+            throw new Exception("Program study should not be null, empty, or blank.");
+        }
+        if (faculty == null || faculty.trim().isEmpty()) {
+            throw new Exception("Faculty should not be null, empty, or blank.");
+        }
+        if (enrollmentYear <= 0 || enrollmentYear >= Integer.MAX_VALUE) {
+            throw new Exception("Enrollment year should be a positive integer.");
+        }
 
-    // Set the instance variables
-    this.programStudy = programStudy;
-    this.faculty = faculty; // Corrected assignment
-    this.enrollmentYear = enrollmentYear;
-}
+        // Set the instance variables
+        this.programStudy = programStudy;
+        this.faculty = faculty; // Corrected assignment
+        this.enrollmentYear = enrollmentYear;
+    }   
 
 
     // This method is setting up the user's school account
