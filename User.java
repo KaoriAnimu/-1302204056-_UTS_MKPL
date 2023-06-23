@@ -111,9 +111,9 @@ public class User {
                 "A-Z]{2,7}$";
 
         Pattern pat = Pattern.compile(emailRegex);
-        if (email == null)
+        if (this.email == null)
             return false;
-        return pat.matcher(email).matches();
+        return pat.matcher(this.email).matches();
     }
 
     // This method is used to check if the user's password is strong enough
