@@ -1,10 +1,10 @@
 package org.telkom.university.code.smell;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.time.Year;
 import java.util.UUID;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 // Signature: DHF
 public class User {
@@ -32,24 +32,25 @@ public class User {
         this.userID = UUID.randomUUID().toString();
     }
 
-    // This method is setting up the user's school identifier
-    public void setSchoolIdentifier(String programStudy, String faculty, int enrollmentYear) throws Exception {
-        // Check if the inputs are empty or blank
-        if (programStudy == null || programStudy.trim().isEmpty()) {
-            throw new Exception("Program study should not be null, empty, or blank.");
-        }
-        if (faculty == null || faculty.trim().isEmpty()) {
-            throw new Exception("Faculty should not be null, empty, or blank.");
-        }
-        if (enrollmentYear <= 0 || enrollmentYear >= Integer.MAX_VALUE) {
-            throw new Exception("Enrollment year should be a positive integer.");
-        }
-
-        // Set the instance variables
-        this.programStudy = programStudy;
-        this.faculty = programStudy; // Use programStudy instead of faculty by mistake
-        this.enrollmentYear = enrollmentYear;
+    /// This method is setting up the user's school identifier
+public void setSchoolIdentifier(String programStudy, String faculty, int enrollmentYear) throws Exception {
+    // Check if the inputs are empty or blank
+    if (programStudy == null || programStudy.trim().isEmpty()) {
+        throw new Exception("Program study should not be null, empty, or blank.");
     }
+    if (faculty == null || faculty.trim().isEmpty()) {
+        throw new Exception("Faculty should not be null, empty, or blank.");
+    }
+    if (enrollmentYear <= 0 || enrollmentYear >= Integer.MAX_VALUE) {
+        throw new Exception("Enrollment year should be a positive integer.");
+    }
+
+    // Set the instance variables
+    this.programStudy = programStudy;
+    this.faculty = faculty; // Corrected assignment
+    this.enrollmentYear = enrollmentYear;
+}
+
 
     // This method is setting up the user's school account
     public void setSchoolAccount(String email, String password, String userName) throws Exception {
