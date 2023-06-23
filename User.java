@@ -108,42 +108,44 @@ public class User {
     }
 
     // This method is used to update user's profile
-    public void updateProfile(String firstName, String lastName, String gender, String studentIdentifierNumber,
-                              String programStudy, String faculty, int enrollmentYear, String email,
-                              String password, String userName) throws Exception {
-
-        if(studentIdentifierNumber.length() != 10 || !StringUtils.isNumeric(studentIdentifierNumber)){
-            throw new Exception("Input is not valid.");
-        }
-
-        boolean isValidEmail = isValidEmail(email);
-        boolean isStrongPassword = isStrongPassword(password);
-
+        public void updateProfile(String firstName, String lastName, String gender, String studentIdentifierNumber,
+                            String programStudy, String faculty, int enrollmentYear, String email,
+                            String password, String userName) throws Exception {
         this.setSchoolIdentifier(programStudy, faculty, enrollmentYear);
         this.setSchoolAccount(email, password, userName);
         this.setGeneralInformation(firstName, lastName, gender, studentIdentifierNumber);
-        int calculateYear = this.calculateEnrollmentYear();
 
-        String emailStatus = "", passwordStatus = "";
+        int calculatedYear = this.calculateEnrollmentYear();
+        String emailStatus = getEmailStatus(email);
+        String passwordStatus = getPasswordStatus(password);
 
-        if(isValidEmail){
-            emailStatus = "VALID";
-        }else{
-            emailStatus = "INVALID";
+        handleProfileUpdateResult(emailStatus, passwordStatus);
+    }
+
+    private String getEmailStatus(String email) {
+        if (isValidEmail(email)) {
+            return "VALID";
+        } else {
+            return "INVALID";
         }
-        if(isStrongPassword){
-            passwordStatus = "STRONG";
-        }else{
-            passwordStatus = "WEAK";
-        }
+    }
 
-        if(emailStatus.equals("VALID") && passwordStatus.equals("STRONG")){
+    private String getPasswordStatus(String password) {
+        if (isStrongPassword(password)) {
+            return "STRONG";
+        } else {
+            return "WEAK";
+        }
+    }
+
+    private void handleProfileUpdateResult(String emailStatus, String passwordStatus) {
+        if (emailStatus.equals("VALID") && passwordStatus.equals("STRONG")) {
             System.out.println("UPDATE COMPLETE!");
-        }else if(emailStatus.equals("VALID") && passwordStatus.equals("WEAK")){
-            System.out.println("PLEASE USE BETTER PASSWORD");
-        }else if(emailStatus.equals("INVALID") && passwordStatus.equals("STRONG")){
+        } else if (emailStatus.equals("VALID") && passwordStatus.equals("WEAK")) {
+            System.out.println("PLEASE USE A BETTER PASSWORD");
+        } else if (emailStatus.equals("INVALID") && passwordStatus.equals("STRONG")) {
             System.out.println("PLEASE CHECK YOUR EMAIL");
-        }else if(emailStatus.equals("INVALID") && passwordStatus.equals("WEAK")){
-            System.out.println("THIS IS JOKE RIGHT? PLEASE USE VALID EMAIL AND STRONG PASSWORD");
+        } else if (emailStatus.equals("INVALID") && passwordStatus.equals("WEAK")) {
+            System.out.println("THIS IS A JOKE, RIGHT? PLEASE USE A VALID EMAIL AND A STRONG PASSWORD");
         }
     }
