@@ -32,38 +32,29 @@ public class User {
         this.userID = UUID.randomUUID().toString();
     }
 
-    /// This method is setting up the user's school identifier
-    public void setSchoolIdentifier(String programStudy, String faculty, int enrollmentYear) throws Exception {
-        // Check if the inputs are empty or blank
-        if (programStudy == null || programStudy.trim().isEmpty()) {
-            throw new Exception("Program study should not be null, empty, or blank.");
+        private void validateInput(String input, String fieldName) throws Exception {
+        if (input == null || input.trim().isEmpty()) {
+            throw new Exception(fieldName + " should not be null, empty, or blank.");
         }
-        if (faculty == null || faculty.trim().isEmpty()) {
-            throw new Exception("Faculty should not be null, empty, or blank.");
-        }
+    }
+
+        public void setSchoolIdentifier(String programStudy, String faculty, int enrollmentYear) throws Exception {
+        validateInput(programStudy, "Program study");
+        validateInput(faculty, "Faculty");
         if (enrollmentYear <= 0 || enrollmentYear >= Integer.MAX_VALUE) {
             throw new Exception("Enrollment year should be a positive integer.");
         }
 
         // Set the instance variables
         this.programStudy = programStudy;
-        this.faculty = faculty; // Corrected assignment
+        this.faculty = faculty;
         this.enrollmentYear = enrollmentYear;
-    }   
+    }
 
-
-    // This method is setting up the user's school account
     public void setSchoolAccount(String email, String password, String userName) throws Exception {
-        // Check if the inputs are empty or blank
-        if (email == null || email.trim().isEmpty()) {
-            throw new Exception("Email should not be null, empty, or blank.");
-        }
-        if (password == null || password.trim().isEmpty()) {
-            throw new Exception("Password should not be null, empty, or blank.");
-        }
-        if (userName == null || userName.trim().isEmpty()) {
-            throw new Exception("User name should not be null, empty, or blank.");
-        }
+        validateInput(email, "Email");
+        validateInput(password, "Password");
+        validateInput(userName, "User name");
 
         // Set the instance variables
         this.email = email;
@@ -71,23 +62,11 @@ public class User {
         this.userName = userName;
     }
 
-    // This method is setting up the user's general information
     public void setGeneralInformation(String firstName, String lastName, String gender, String studentIdentifierNumber) throws Exception {
-        // Check if the inputs are empty or blank
-        if (firstName == null || firstName.trim().isEmpty()) {
-            throw new Exception("First name should not be null, empty, or blank.");
-        }
-        if (lastName == null || lastName.trim().isEmpty()) {
-            throw new Exception("Last name should not be null, empty, or blank.");
-        }
-
-        if (gender == null || gender.trim().isEmpty()) {
-            throw new Exception("Gender should not be null, empty, or blank.");
-        }
-
-        if (studentIdentifierNumber == null || studentIdentifierNumber.trim().isEmpty()) {
-            throw new Exception("Student identifier number should not be null, empty, or blank.");
-        }
+        validateInput(firstName, "First name");
+        validateInput(lastName, "Last name");
+        validateInput(gender, "Gender");
+        validateInput(studentIdentifierNumber, "Student identifier number");
 
         // Set the instance variables
         this.firstName = firstName;
@@ -95,6 +74,7 @@ public class User {
         this.gender = gender;
         this.studentIdentifierNumber = studentIdentifierNumber;
     }
+
 
     // This method is used to calculate the year of the user based on the enrollment year
     public int calculateEnrollmentYear() {
@@ -111,9 +91,9 @@ public class User {
                 "A-Z]{2,7}$";
 
         Pattern pat = Pattern.compile(emailRegex);
-        if (email == null)
+        if (this.email == null)
             return false;
-        return pat.matcher(email).matches();
+        return pat.matcher(this.email).matches();
     }
 
     // This method is used to check if the user's password is strong enough
