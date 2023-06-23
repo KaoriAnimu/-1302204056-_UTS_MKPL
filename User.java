@@ -104,7 +104,7 @@ public class User {
     }
 
     // This method is used to validate user's email address
-    public boolean isValidEmail(String email) {
+    public boolean isValidEmail() {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
