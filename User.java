@@ -117,13 +117,13 @@ public class User {
     }
 
     // This method is used to check if the user's password is strong enough
-    public boolean isStrongPassword(String password) {
+    public boolean isStrongPassword() {
         String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
 
         Pattern pat = Pattern.compile(passwordRegex);
-        if (password == null)
+        if (this.password == null)
             return false;
-        return pat.matcher(password).matches();
+        return pat.matcher(this.password).matches();
     }
 
     // This method is used to update user's profile
